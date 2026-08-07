@@ -73,9 +73,8 @@ def pegar_arquivo_final(ydl, info, formato):
     filename = ydl.prepare_filename(info)
 
     if formato == 'mp3':
-        # CORREÇÃO: Pega a string do nome sem quebrar a tipagem do Python
-        nome_base = filename.rsplit('.', 1)[0]
-        return nome_base + '.mp3'
+        # CORREÇÃO: Extrai a string correta do rsplit usando o índice [0]
+        return filename.rsplit('.', 1)[0] + '.mp3'
 
     try:
         arquivo_merged = info['requested_downloads'][0]['filepath']
@@ -84,8 +83,8 @@ def pegar_arquivo_final(ydl, info, formato):
     except (KeyError, IndexError, TypeError):
         pass
 
-    nome_base = filename.rsplit('.', 1)[0]
-    return nome_base + '.mp4'
+    # CORREÇÃO: Extrai a string correta do rsplit usando o índice [0]
+    return filename.rsplit('.', 1)[0] + '.mp4'
 
 
 app = FastAPI(
@@ -102,7 +101,7 @@ app.add_middleware(
 )
 
 # ------------------------------------------------------------
-# Rotas da API
+# Rotas da API (Mapeamento da raiz para evitar o erro 404)
 # ------------------------------------------------------------
 @app.get("/")
 @app.get("/api/info")
