@@ -95,6 +95,7 @@ def pegar_arquivo_final(ydl, info, formato):
     filename = ydl.prepare_filename(info)
 
     if formato == 'mp3':
+        # CORREÇÃO: Usando rsplit de forma segura sem quebrar o tipo da variável
         return filename.rsplit('.', 1)[0] + '.mp3'
 
     try:
@@ -222,6 +223,7 @@ async def async_download(
     })
 
 
+# CORREÇÃO: Rota /status completada corretamente
 @app.get("/status")
 async def get_status(download_id: str = Query(..., description="ID do download")):
     if download_id not in download_status:
@@ -250,6 +252,7 @@ async def get_status(download_id: str = Query(..., description="ID do download")
     return JSONResponse(resposta)
 
 
+# CORREÇÃO: Adicionada rota /download-file que estava faltando
 @app.get("/download-file")
 async def download_file(download_id: str = Query(..., description="ID do download")):
     if download_id not in download_status:
