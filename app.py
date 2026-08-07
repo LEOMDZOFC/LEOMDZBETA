@@ -73,7 +73,7 @@ def pegar_arquivo_final(ydl, info, formato):
     filename = ydl.prepare_filename(info)
 
     if formato == 'mp3':
-        # CORREÇÃO: Pega a string do nome sem estragar a tipagem do Python
+        # CORREÇÃO: Pega a string do nome sem quebrar a tipagem do Python
         nome_base = filename.rsplit('.', 1)[0]
         return nome_base + '.mp3'
 
